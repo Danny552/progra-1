@@ -1,0 +1,28 @@
+#lang racket
+(define (monty-hall opc)
+  (define puertas '(1 2 3))
+  (define prem (random 1 4))
+  (define monty-opc
+    (let ((cabras (remove prem puertas))
+          (opc-no-elegida (remove opc puertas)))
+      (remove* cabras opc-no-elegida)))
+  (define nueva-opc
+    (let ((opc-no-elegida (remove monty-opc puertas)))
+      (car (remove opc opc-no-elegida))))
+  (display "Cambiaste a la opción: ")(displayln nueva-opc)
+  (display "El premio estaba en la: ")(displayln prem)
+  (if (= prem nueva-opc)
+      (display "¡Felicidades te lo ganaste!")
+      (display "Lástima, será la próxima")
+      )
+  )
+(define(interfaz)
+  (display "Elige la puerta: 1, 2 o 3: ")
+  (define opc(read))
+  (if (and (>= opc 1)(<= opc 3))
+      (monty-hall opc)
+      (display "Esa no es una puerta válida")
+      )
+  )
+(interfaz)
+; en este programa, siempre se cambia la puerta elgida, sin importar

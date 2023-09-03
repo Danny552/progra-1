@@ -1,0 +1,66 @@
+#lang racket
+
+;Imprimir P
+(define (ImprP cantidadP)
+  (if (= cantidadP 0)
+      (void)
+      (begin
+        (printf "P ")
+        (ImprP (- cantidadP 1))
+        )
+      )
+  )
+
+;Imprimir espacio
+(define (ImprSpace cantidadSpace)
+  (if (= 0 cantidadSpace)
+      (void)
+      (begin
+        (printf " ")
+        (ImprSpace (- cantidadSpace 1))
+        )
+      )
+  )
+
+;Función Auxiliar Inversa
+(define filasE (read))
+
+(define (PiramideInversa filas)
+  (if (= filas 0)
+      (void)
+      (begin
+        (ImprSpace (- filasE (- filas 1)))
+        (ImprP filas)
+        (newline)
+        (PiramideInversa (- filas 1))
+        )
+      )
+  )
+
+;Función Auxiliar Derecha
+
+(define (PiramideNormal filas)
+  (if (= filas 0)
+      (void)
+      (begin
+        (ImprSpace filas)
+        (ImprP (- filasE (- filas 1)))
+        (newline)
+        (PiramideNormal (- filas 1))
+        )
+      )
+  )
+
+;función principal
+
+(define (MoñoCompleto filas)
+  (if (= filas 0)
+      (void)
+      (begin
+        (PiramideInversa filas)
+        (PiramideNormal filas)
+        )
+      )
+  )
+
+(MoñoCompleto filasE)

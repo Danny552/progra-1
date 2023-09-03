@@ -1,0 +1,15 @@
+#lang racket
+(define c 0)
+(define n (read))
+(define (sucesion n)
+  (if (= c n)
+      (display (expt 2 c))
+      (begin
+        (display (expt 2 c))
+        (display " + ")
+        (set! c (+ 1 c))
+        (sucesion n)
+        )
+      )
+  )
+(sucesion n)

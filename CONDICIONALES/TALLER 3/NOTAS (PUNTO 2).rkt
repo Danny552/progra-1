@@ -1,0 +1,16 @@
+#lang racket
+(provide nota)
+(define (nota)
+  (define n 0)
+  (displayln "CALCULADORA DE NOTAS\n")
+  (displayln "Ingrese la nota del estudiante: ")
+  (set! n (read))
+  (cond
+    [(>= n 5)
+     (displayln "Excelente")(display (* n 50))]; Notas más altas
+    [(and(< n 5)(>= n 3))
+     (displayln "Bueno")(display (* n 20))]; nota media
+    [(< n 3)
+     (displayln "Mal")(display (* n 10))]; notas más bajas
+    )
+  )

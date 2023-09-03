@@ -1,0 +1,87 @@
+#lang racket
+(define (inicio)
+  
+  (define (creav x b)
+  (define m (make-vector x 0))
+  (cream m 0 b)
+  )
+(define (cream v p b)
+  (if (< p (vector-length v))
+      (begin
+        (vector-set! v p (make-vector b 0))
+        (cream v (+ p 1) b)
+      )
+      (void)
+   )
+ )
+  (display "Inserte la cantidad de productos que desee registrar: ")
+  (define x (read))
+  (define base-de-datos (make-vector x 0))
+  (cream base-de-datos 0 8)
+  (define numero-producto 0)
+  (interfaz base-de-datos numero-producto)
+  )
+  
+(define (interfaz base numero-producto)
+  (displayln "\nBienvenido a la base de datos de nuestra tienda")
+  (newline)
+  (displayln "Indique lo que desee realizar")
+  (display "1) Registrar un producto\n2) Actualizar datos de un producto existente (requiere la identificación del producto)\n")
+  (display "3) Lista de datos de productos de dicho tipo \n4) Lista de productos de precio mayor al que indique\n5) Lista general de los productos registrados\n0) Salir\n")
+  (define opción (read))
+  (condicional-opciones opción base numero-producto)
+  )
+  (define (condicional-opciones opción base numero-producto)
+  (cond
+    [(= opción 1)(registrar base numero-producto)]
+    [(= opción 2)(void)]
+    [(= opción 3)(void)]
+    [(= opción 4)(void)]
+    [(= opción 5)base]
+    [(= opción 0)(display "Gracias por usar nuestros servicios")]
+    (else(display "vuelva a intentarlo, la opción no se encuentra en la lista. \n")
+         (set! opción (read))
+         (condicional-opciones opción base numero-producto))
+  )
+    )
+(define (registrar base numero-producto)
+  (define llena-volver 0)
+  (if (< numero-producto (vector-length base))
+      (begin
+        (display "Inserte el código del producto: ")
+        (vector-set! (vector-ref base numero-producto) 0 (read))
+        (displayln "Inserte el género del libro:")
+        (displayln "1) Acción")
+        (displayln "2) Romance")
+        (displayln "3) Misterio")
+        (displayln "4) Autoayuda")
+        (displayln "5) Académico")
+        (vector-set! (vector-ref base numero-producto) 1 (read))
+        (display "Inserte el nombre del libro: ")
+        (read-line)
+        (vector-set! (vector-ref base numero-producto) 2 (read-line))
+        (display "Inserte la fecha máxima de disponibilidad (dd/mm/aaaa): ")
+        (vector-set! (vector-ref base numero-producto) 3 (read-line))
+        (display "Inserte el número de páginas: ")
+        (vector-set! (vector-ref base numero-producto) 4 (read-line))
+        (display "Inserte la cantidad de libros disponibles: ")
+        (vector-set! (vector-ref base numero-producto) 5 (read))
+        (display "Indique el costo de cada libro: ")
+        (vector-set! (vector-ref base numero-producto) 6 (read))
+        (vector-set! (vector-ref base numero-producto) 7 (* (vector-ref(vector-ref base numero-producto) 5)(vector-ref(vector-ref base numero-producto) 6)))
+        (set! numero-producto (+ numero-producto 1))
+        (interfaz base numero-producto)
+        )
+      (begin
+        (displayln "¡La base de datos está llena!")
+        (displayln "¿Quiere volver al menú anterior? (responder negativamente cerrará el programa)")
+        (display "1) Si \n2) No")
+        (set! llena-volver (read))
+        (cond
+          [(= llena-volver 1)(interfaz base numero-producto)]
+          [(= llena-volver 2)(display "Gracias por usar nuestros servicios")]
+          )
+        )
+      )
+  )
+      (inicio)

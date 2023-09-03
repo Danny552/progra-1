@@ -1,0 +1,16 @@
+#lang racket
+(printf "Porfavor seleccione el numero de meses: ")
+
+
+(define meses (read))
+(define (fibonacci a b contador)
+     (if (= contador meses)
+         (printf "~a" a)
+         (fibonacci b (+ a b) (+ 1 contador))
+         )
+     )
+(cond
+  [(= meses 0)(display "0")]
+  [(= meses 1)(display "0")]
+  )
+ (fibonacci 1 1 1)

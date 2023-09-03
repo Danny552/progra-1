@@ -1,0 +1,20 @@
+#lang racket
+(define (guardar-divisores num contador lista)
+  (if(= contador num)
+     (begin
+       (set! lista (append lista (list contador)))
+       (display "The divisors of the number are: ")
+       (display lista)
+       )
+     (if (integer? (/ num contador))
+         (begin
+           (set! lista (append lista (list contador)))
+           (guardar-divisores num (+ contador 1) lista)
+           )
+         (guardar-divisores num (+ contador 1) lista)
+         )
+     )
+  )
+(display "Insert the number you want to know its divisors: ")
+(define num (read))
+(guardar-divisores num 1 '())

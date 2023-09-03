@@ -1,0 +1,17 @@
+#lang racket
+(define (Sumar num1 num2 numMul)
+  (if (= num2 1)
+      (void)
+      (begin
+        (printf "\n~a" (+ num1 numMul))
+        (Sumar (+ num1 numMul) (- num2 1) numMul)
+        )
+      )
+  )
+(printf "los numeros que ingrese se multiplicarán\n")
+(printf "\nPor favor ingrese un numero: ")
+(define num1 (read))
+(printf "\nPor favor ingrese otro numero: ")
+(define num2 (read))
+(define numMul num1)
+(Sumar num1 num2 numMul)
